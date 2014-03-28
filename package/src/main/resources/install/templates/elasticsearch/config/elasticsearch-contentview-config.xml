@@ -3,7 +3,6 @@
 
   <require>org.nuxeo.ecm.webapp.contentview.contrib</require>
   <require>org.nuxeo.elasticsearch.ElasticSearchComponent</require>
-  <require>org.nuxeo.ecm.platform.suggestbox.core.pageproviders</require>
 
   <extension target="org.nuxeo.ecm.platform.ui.web.ContentViewService"
     point="contentViews">
@@ -73,22 +72,5 @@
 
 
   </extension>
-
-  <extension target="org.nuxeo.ecm.platform.query.api.PageProviderService"
-    point="providers">
-
-      <genericPageProvider  name="DEFAULT_DOCUMENT_SUGGESTION"
-        class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
-        <property name="maxResults">PAGE_SIZE</property>
-        <pattern quoteParameters="false" escapeParameters="false">
-          SELECT * FROM Document WHERE ecm:fulltext.dc:title LIKE ? AND ecm:mixinType !=
-          'HiddenInNavigation' AND ecm:isCheckedInVersion = 0 AND
-          ecm:currentLifeCycleState != 'deleted'
-        </pattern>
-        <pageSize>10</pageSize>
-      </genericPageProvider>
-
-  </extension>
-
 
 </component>

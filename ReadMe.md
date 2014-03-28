@@ -28,8 +28,19 @@ To install the package :
       - for now the package will remove the old lucene libs that are required for embedded H2 to run
  - then install the package
       - from the AdminCenter (Upload + install)
-      - from the command line using mp-install package.zip --nodeps
+      - from the command line using `nuxeoctl mp-install package.zip --nodeps`
 
+## Upon first startup
+
+Initially the `elasticsearch` index will be empty.
+
+To populate it you have 2 options :
+
+ - if you have a small repository : 
+     - Go in Admin Center / elasticsearch / config 
+     - use teh Reindex button ()and wait a few seconds)
+ - if you have a big repository
+     - check https://github.com/nuxeo/nuxeo-elasticsearch/tree/master/scripts
 
 
  
