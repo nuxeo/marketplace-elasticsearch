@@ -1,0 +1,21 @@
+<component name="org.nuxeo.elasticsearch.test.contrib">
+
+  <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
+    point="elasticSearchConfig">
+
+    <elasticSearchConfig inProcess="true">
+      <nodeName>nuxeoTestNode</nodeName>
+      <clusterName>nuxeoTestCluster</clusterName>
+<!--      <dataPath>/home/tiry/devs/runEnv/nuxeo-cap-5.9.3-I20140328_0120-tomcat/nxserver/data/es</dataPath>
+      <logPath>/home/tiry/devs/runEnv/nuxeo-cap-5.9.3-I20140328_0120-tomcat/nxserver/data/es</logPath>-->
+    </elasticSearchConfig>
+    <!--
+    <elasticSearchConfig inProcess="false" autostartLocalNode="false">
+      <hostIp>localhost</hostIp>
+      <hostPort>9300</hostPort>
+    </elasticSearchConfig>
+    -->
+  </extension>
+
+</component>
+
