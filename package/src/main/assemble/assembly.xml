@@ -87,7 +87,7 @@
 
 
     <copy todir="${outdir}/nxr/lib">
-      <artifact:resolveFile key="org.apache.lucene:lucene-core:4.6.1:jar" />
+      <artifact:resolveFile key="org.apache.lucene:lucene-core:4.7.0:jar" />
     </copy>
 
     <!-- rename jexl2 so that update system does not remplace jexl 1 lib that is already part of Nuxeo -->
