@@ -3,17 +3,15 @@
 
   <require>org.nuxeo.ecm.webapp.contentview.contrib</require>
   <require>org.nuxeo.elasticsearch.ElasticSearchComponent</require>
+  <require>org.nuxeo.ecm.webapp.pageproviders.contrib</require>
 
   <extension target="org.nuxeo.ecm.platform.ui.web.ContentViewService"
     point="contentViews">
 
+   <!-- default content views for document content -->
    <contentView name="document_content">
 
-      <title>label.contentview.document_content</title>
-      <translateTitle>true</translateTitle>
-      <showTitle>false</showTitle>
-
-      <genericPageProvider name="NATIVE_PP_1"
+      <genericPageProvider name="DocumentContent_ES"
         class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
 
         <property name="coreSession">#{documentManager}</property>
@@ -41,35 +39,101 @@
         <pageSize>20</pageSize>
       </genericPageProvider>
 
-      <searchLayout name="document_content_filter"
-        filterDisplayType="quick" />
-      <showFilterForm>true</showFilterForm>
+    </contentView>
 
-      <showPageSizeSelector>true</showPageSizeSelector>
-      <useGlobalPageSize>true</useGlobalPageSize>
-      <refresh>
-        <event>documentChanged</event>
-        <event>documentChildrenChanged</event>
-      </refresh>
-      <cacheKey>#{currentDocument.id}</cacheKey>
-      <cacheSize>10</cacheSize>
-      <resultLayouts>
-        <layout name="document_listing_ajax" title="document_listing"
-          translateTitle="true" iconPath="/icons/document_listing_icon.png"
-          showCSVExport="true" showPDFExport="false" showSyndicationLinks="true" />
-        <layout name="document_listing_ajax_compact_2_columns" title="document_listing_compact_2_columns"
-          translateTitle="true" iconPath="/icons/document_listing_compact_2_columns_icon.png"
-          showCSVExport="true" showPDFExport="false" showSyndicationLinks="true" />
-        <layout name="document_listing_ajax_icon_2_columns" title="document_listing_icon_2_columns"
-          translateTitle="true" iconPath="/icons/document_listing_icon_2_columns_icon.png"
-          showCSVExport="true" showPDFExport="false" showSyndicationLinks="true" />
-      </resultLayouts>
+    <contentView name="document_trash_content">
 
-      <selectionList>CURRENT_SELECTION</selectionList>
-      <actions category="CURRENT_SELECTION_LIST" />
+      <genericPageProvider name="TrashContent_ES"
+        class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
+        <property name="coreSession">#{documentManager}</property>
+        <whereClause docType="AdvancedSearch">
+          <predicate parameter="ecm:fulltext" operator="FULLTEXT">
+            <field schema="advanced_search" name="fulltext_all" />
+          </predicate>
+          <predicate parameter="dc:title" operator="FULLTEXT">
+            <field schema="advanced_search" name="title" />
+          </predicate>
+          <predicate parameter="dc:modified" operator="BETWEEN">
+            <field schema="advanced_search" name="modified_min" />
+            <field schema="advanced_search" name="modified_max" />
+          </predicate>
+          <fixedPart>
+            ecm:parentId = ? AND ecm:isCheckedInVersion = 0 AND
+            ecm:mixinType !=
+            'HiddenInNavigation' AND ecm:currentLifeCycleState =
+            'deleted'
+          </fixedPart>
+        </whereClause>
+        <parameter>#{currentDocument.id}</parameter>
+        <sort column="dc:title" ascending="true" />
+        <pageSize>20</pageSize>
+      </genericPageProvider>
 
     </contentView>
 
+    <contentView name="section_content">
+
+      <genericPageProvider name="SectionContent_ES"
+        class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
+
+        <property name="coreSession">#{documentManager}</property>
+        <property name="maxResults">DEFAULT_NAVIGATION_RESULTS</property>
+        <whereClause docType="AdvancedSearch">
+          <predicate parameter="ecm:fulltext" operator="FULLTEXT">
+            <field schema="advanced_search" name="fulltext_all" />
+          </predicate>
+          <predicate parameter="dc:title" operator="FULLTEXT">
+            <field schema="advanced_search" name="title" />
+          </predicate>
+          <predicate parameter="dc:modified" operator="BETWEEN">
+            <field schema="advanced_search" name="modified_min" />
+            <field schema="advanced_search" name="modified_max" />
+          </predicate>
+          <fixedPart>
+            ecm:parentId = ? AND ecm:isCheckedInVersion = 0 AND
+            ecm:mixinType !=
+            'HiddenInNavigation' AND ecm:currentLifeCycleState
+            != 'deleted'
+          </fixedPart>
+        </whereClause>
+        <parameter>#{currentDocument.id}</parameter>
+        <sort column="dc:title" ascending="true" />
+        <pageSize>20</pageSize>
+      </genericPageProvider>
+
+    </contentView>
+
+  </extension>
+
+  <extension target="org.nuxeo.ecm.platform.query.api.PageProviderService"
+    point="providers">
+
+   <!--navigation tree -->
+   <genericPageProvider name="tree_children"
+     class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
+      <property name="maxResults">PAGE_SIZE</property>
+      <pattern>
+        SELECT * FROM Document WHERE ecm:parentId = ? AND ecm:isProxy = 0 AND
+        ecm:mixinType = 'Folderish' AND ecm:mixinType != 'HiddenInNavigation'
+        AND ecm:isCheckedInVersion = 0 AND ecm:currentLifeCycleState !=
+        'deleted'
+      </pattern>
+      <sort column="dc:title" ascending="true" />
+      <pageSize>50</pageSize>
+    </genericPageProvider>
+
+   <!-- document suggestion -->
+   <genericPageProvider name="default_document_suggestion"
+     class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
+      <property name="maxResults">PAGE_SIZE</property>
+      <pattern quoteParameters="false" escapeParameters="true">
+        SELECT * FROM Document WHERE ecm:fulltext LIKE '?*' AND ecm:mixinType !=
+        'HiddenInNavigation' AND ecm:isCheckedInVersion = 0 AND
+        ecm:currentLifeCycleState != 'deleted'
+      </pattern>
+      <!-- sort column="dc:title" ascending="true" / sort by fulltext relevance -->
+      <pageSize>5</pageSize>
+    </genericPageProvider>
 
   </extension>
 
