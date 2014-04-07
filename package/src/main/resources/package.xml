@@ -1,9 +1,9 @@
-<package type="addon" name="nuxeo-elastic-search" version="@VERSION@">
-  <title>Nuxeo Elastic Search Integration</title>
+<package type="addon" name="nuxeo-elasticsearch" version="@VERSION@">
+  <title>Nuxeo Elasticsearch Integration</title>
   <description>
     <p>Add support for Elasticsearch based indexing and query</p>
   </description>
-  <home-page>https://github.com/nuxeo/nuxeo-elastic-search</home-page>
+  <home-page>https://github.com/nuxeo/nuxeo-elasticsearch</home-page>
   <vendor>Nuxeo</vendor>
   <installer restart="true" />
   <uninstaller restart="true" />

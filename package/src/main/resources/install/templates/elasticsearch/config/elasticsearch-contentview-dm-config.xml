@@ -5,6 +5,7 @@
   <require>org.nuxeo.elasticsearch.ElasticSearchComponent</require>
   <require>org.nuxeo.ecm.platform.suggestbox.core.pageproviders</require>
 
+
   <extension target="org.nuxeo.ecm.platform.query.api.PageProviderService"
     point="providers">
 

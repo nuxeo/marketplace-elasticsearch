@@ -6,7 +6,7 @@
     <version>5.9.3-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.nuxeo.elastic.search</groupId>
+  <groupId>org.nuxeo.elasticsearch</groupId>
   <artifactId>marketplace-parent</artifactId>
   <packaging>pom</packaging>
   <name>Nuxeo Marketplace package for Nuxeo Elastic Search</name>
@@ -32,7 +32,7 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.nuxeo.elastic.search</groupId>
+        <groupId>org.nuxeo.elasticsearch</groupId>
         <artifactId>package</artifactId>
         <version>${marketplace.elasticsearch.version}</version>
         <type>zip</type>

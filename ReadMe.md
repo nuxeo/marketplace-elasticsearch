@@ -3,12 +3,12 @@ marketplace-nuxeo-elasticsearch
 
 ## About
 
-This is project allows to build the marketplace package for `nuxeo-elastic-search` addon.
+This is project allows to build the marketplace package for `nuxeo-elasticsearch` addon.
 
 The goal of this package is to provide an easy way to test `elasticsearch` with Nuxeo :
 
  - simple installation
- - default configuration for embedded ElasticSeach
+ - default configuration for embedded Elasticsearch
  - default configuration to replace default PageProviders by `elasticsearch` based ones
 
 
