@@ -27,7 +27,7 @@
             <field schema="advanced_search" name="modified_min" />
             <field schema="advanced_search" name="modified_max" />
           </predicate>
-          <fixedPart>SELECT * FROM Document WHERE
+          <fixedPart>
             ecm:parentId = ? AND ecm:isCheckedInVersion = 0 AND
             ecm:mixinType !=
             'HiddenInNavigation' AND ecm:currentLifeCycleState
@@ -113,7 +113,7 @@
      class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
       <property name="maxResults">PAGE_SIZE</property>
       <pattern>
-        SELECT * FROM Document WHERE ecm:parentId = ? AND ecm:isProxy = 0 AND
+        ecm:parentId = ? AND ecm:isProxy = 0 AND
         ecm:mixinType = 'Folderish' AND ecm:mixinType != 'HiddenInNavigation'
         AND ecm:isCheckedInVersion = 0 AND ecm:currentLifeCycleState !=
         'deleted'
@@ -127,12 +127,12 @@
      class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
       <property name="maxResults">PAGE_SIZE</property>
       <pattern quoteParameters="false" escapeParameters="true">
-        SELECT * FROM Document WHERE ecm:fulltext LIKE '?*' AND ecm:mixinType !=
+        ecm:fulltext LIKE '?*' AND ecm:mixinType !=
         'HiddenInNavigation' AND ecm:isCheckedInVersion = 0 AND
         ecm:currentLifeCycleState != 'deleted'
       </pattern>
       <!-- sort column="dc:title" ascending="true" / sort by fulltext relevance -->
-      <pageSize>5</pageSize>
+      <pageSize>10</pageSize>
     </genericPageProvider>
 
   </extension>

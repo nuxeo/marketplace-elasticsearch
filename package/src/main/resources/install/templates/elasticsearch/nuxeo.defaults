@@ -1,0 +1,14 @@
+# name of the index for the document
+elasticsearch.indexName=nuxeo
+
+# comma separated list of remote ES, if empty use a local in jvm node
+elasticsearch.addressList=
+
+# name of the cluster
+elasticsearch.clutserName=nuxeoCluster
+
+# name of the local node
+elasticsearch.nodeName=nuxeoNode
+
+# does the local node accept http request on port 9200
+elasticsearch.enableHttp=false

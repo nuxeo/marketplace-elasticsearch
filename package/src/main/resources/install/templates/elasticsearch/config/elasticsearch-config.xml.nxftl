@@ -1,0 +1,34 @@
+<#escape x as x?xml>
+<?xml version="1.0"?>
+<component name="org.nuxeo.elasticsearch.test.contrib">
+  <require>org.nuxeo.elasticsearch.index.defaultContrib</require>
+
+<#if "${elasticsearch.addressList}" == "">
+  <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
+    point="elasticSearchLocal">
+    <elasticSearchLocal
+      clusterName="${elasticsearch.clutserName}"
+      nodeName="${elasticsearch.nodeName}"
+      nodeEnableHttp="${elasticsearch.enableHttp}" />
+  </extension>
+<#else>
+  <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
+    point="elasticSearchRemote">
+    <elasticSearchRemote 
+      clusterName="${elasticsearch.clutserName}"
+      addressList="${elasticsearch.addressList}"
+      clientTransportSniff="false"
+      clientTransportIgnoreClusterName="false"
+      clientTransportPingTimeout="5s"
+      clientTransportNodesSamplerInterval="5s" />
+  </extension>
+</#if>
+
+  <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
+    point="elasticSearchIndex">
+    <elasticSearchIndex name="${elasticsearch.indexName}" type="doc" />
+  </extension>
+
+</component>
+</#escape>
+

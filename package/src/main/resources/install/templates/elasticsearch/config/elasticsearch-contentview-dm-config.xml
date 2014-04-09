@@ -13,11 +13,11 @@
         class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
         <property name="maxResults">PAGE_SIZE</property>
         <pattern quoteParameters="false" escapeParameters="false">
-          SELECT * FROM Document WHERE ecm:fulltext.dc:title LIKE ? AND ecm:mixinType !=
+          ecm:fulltext.dc:title LIKE ? AND ecm:mixinType !=
           'HiddenInNavigation' AND ecm:isCheckedInVersion = 0 AND
           ecm:currentLifeCycleState != 'deleted'
         </pattern>
-        <pageSize>10</pageSize>
+        <pageSize>20</pageSize>
       </genericPageProvider>
 
   </extension>
