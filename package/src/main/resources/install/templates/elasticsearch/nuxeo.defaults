@@ -5,10 +5,16 @@ elasticsearch.indexName=nuxeo
 elasticsearch.addressList=
 
 # name of the cluster
-elasticsearch.clutserName=nuxeoCluster
+elasticsearch.clusterName=nuxeoCluster
+
+# number of replicas only for non local node
+elasticsearch.indexNumberOfReplicas=1
+
+# number of shards only for non local node
+elasticsearch.indexNumberOfShards=5
 
 # name of the local node
 elasticsearch.nodeName=nuxeoNode
 
-# does the local node accept http request on port 9200
+# does the local node accept HTTP request on port 9200
 elasticsearch.enableHttp=false

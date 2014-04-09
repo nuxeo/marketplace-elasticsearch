@@ -7,7 +7,7 @@
   <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
     point="elasticSearchLocal">
     <elasticSearchLocal
-      clusterName="${elasticsearch.clutserName}"
+      clusterName="${elasticsearch.clusterName}"
       nodeName="${elasticsearch.nodeName}"
       nodeEnableHttp="${elasticsearch.enableHttp}" />
   </extension>
@@ -15,8 +15,10 @@
   <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
     point="elasticSearchRemote">
     <elasticSearchRemote 
-      clusterName="${elasticsearch.clutserName}"
+      clusterName="${elasticsearch.clusterName}"
       addressList="${elasticsearch.addressList}"
+      indexNumberOfShards="${elasticsearch.indexNumberOfShards}"
+      indexNumberOfReplicas="${elasticsearch.indexNumberOfReplicas}"
       clientTransportSniff="false"
       clientTransportIgnoreClusterName="false"
       clientTransportPingTimeout="5s"
