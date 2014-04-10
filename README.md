@@ -45,7 +45,7 @@ elasticsearch indexes will be located in
 This embedded mode is only for testing purpose and should not be used
 in production.
 
-To connect to an existing `elasticsearch` cluster you need to edit the
+To connect to an existing `elasticsearch 1.1.0` cluster you need to edit the
 `nuxeo.conf` and add the following lines:
 
 
