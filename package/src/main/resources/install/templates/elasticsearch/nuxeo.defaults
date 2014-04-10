@@ -1,20 +1,20 @@
-# name of the index for the document
+# Name of the Elasticsearch index for Nuxeo documents
 elasticsearch.indexName=nuxeo
 
-# comma separated list of remote ES, if empty use a local in jvm node
+# Comma separated list of Elasticsearch nodes, if empty use a local in JVM node
 elasticsearch.addressList=
 
-# name of the cluster
+# Name of the Elasticsearch cluster to join
 elasticsearch.clusterName=nuxeoCluster
 
-# number of replicas only for non local node
+# Number of replicas (not for local node)
 elasticsearch.indexNumberOfReplicas=1
 
-# number of shards only for non local node
+# Number of shards (not for local node)
 elasticsearch.indexNumberOfShards=5
 
-# name of the local node
+# Name of the local node
 elasticsearch.nodeName=nuxeoNode
 
-# does the local node accept HTTP request on port 9200
-elasticsearch.enableHttp=false
+# Does the local node accept HTTP request on port 9200
+elasticsearch.httpEnabled=false

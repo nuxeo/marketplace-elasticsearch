@@ -9,7 +9,7 @@
     <elasticSearchLocal
       clusterName="${elasticsearch.clusterName}"
       nodeName="${elasticsearch.nodeName}"
-      nodeEnableHttp="${elasticsearch.enableHttp}" />
+      httpEnabled="${elasticsearch.httpEnabled}" />
   </extension>
 <#else>
   <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
