@@ -1,6 +1,6 @@
 <#escape x as x?xml>
 <?xml version="1.0"?>
-<component name="org.nuxeo.elasticsearch.test.contrib">
+<component name="org.nuxeo.elasticsearch.index.defaultMarketPlaceContrib">
   <require>org.nuxeo.elasticsearch.index.defaultContrib</require>
 
 <#if "${elasticsearch.addressList}" == "">

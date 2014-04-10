@@ -25,40 +25,68 @@ To build and run the tests, simply start the maven build :
 
 To install the package :
 
- - take a fresh nuxeo CAP 5.9.3
+ 1. Take a fresh Nuxeo CAP 5.9.3
 
- - start the configuration wizard and switch to PGSQL (or an other
-   external database)
-      - for now the package will remove the old lucene libs that are
-        required for embedded H2 to run
+ 2. Start the configuration wizard and switch to PostgreSQL (or an
+    other external database). For now we don't support the default H2
+    database because of incompatible lucene libs dependencies.
 
- - then install the package
+ 3. Install the nuxeo-elasticsearch package
       - from the AdminCenter (Upload + install)
       - from the command line using `nuxeoctl mp-install package.zip --nodeps`
 
 ## Configuring
 
-The default `elasticsearch` template will use an embedded
-elasticsearch instance, this is only for testing purpose.
+The default configuration uses an embedded elasticsearch instance
+which is running in the same JVM as Nuxeo. By default the
+elasticsearch indexes will be located in
+`nxsverver/data/elasticsearch`.
 
-The elasticsearch data
+This embedded mode is only for testing purpose and should not be used
+in production.
 
-You can easily install an `elasticsearch` cluster and setup the
-`nuxeo.conf`:
+To connect to an existing `elasticsearch` cluster you need to edit the
+`nuxeo.conf` and add the following lines:
+
 
     elasticsearch.addressList=localhost:9300,anothernode:9300
     elasticsearch.clusterName=elasticsearch
 
+
 Where:
-- the addressList point ot one or many known elasticsearch nodes.
-- the clusterName is set to the current cluster name
+- `addressList` point to one or many elasticsearch nodes.
+- `clusterName` is the cluster name to join.
 
-Look at the `templates/elasticsearch/nuxeo.defaults` for configuration
-options.
+Look at the
+[`nuxeo.defaults`](https://github.com/nuxeo/marketplace-elasticsearch/blob/master/package/src/main/resources/install/templates/elasticsearch/nuxeo.defaults)
+in the elasticsearch template for more configuration options.
 
-If you want to change the default anylisers for fulltext fields or
-change the elastic index settings you need to add a contribution to
-override
+If you want to fine tune the indexing, for instance if you want to
+customize the anlyzer or changing the mapping, you need to add a
+contribution to override the default one.
+
+Just create a new config file `myelasticsearch-config.xml` with
+something like this:
+
+
+    <?xml version="1.0"?>
+    <component name="myorg.elasticsearch.contrib">
+      <require>org.nuxeo.elasticsearch.index.defaultMarketPlaceContrib</require>
+      <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
+        point="elasticSearchIndex">
+        <elasticSearchIndex name="nuxeo" type="doc">
+    	  <settings />
+    	  <mapping />
+    	  <fulltext />
+    	</elasticSearchInde>
+      </extension>
+    </component>
+
+You can see the
+[default configuration here](https://github.com/nuxeo/nuxeo-elasticsearch/blob/master/nuxeo-elasticsearch-core/src/main/resources/OSGI-INF/elasticsearch-default-index-contrib.xml),
+and mapping
+[extension point documentation here](https://github.com/nuxeo/nuxeo-elasticsearch/blob/master/nuxeo-elasticsearch-core/src/main/resources/OSGI-INF/elasticsearch-service.xml).
+
 
 ## Upon first startup
 
@@ -71,8 +99,10 @@ To populate it you have 2 options :
      - use the Reindex button (and wait a few seconds)
 
 - if you have a big repository
-     - check https://github.com/nuxeo/nuxeo-elasticsearch/tree/master/scripts
-	   you will find a script to dump and import Nuxeo documents.
+     - check
+	   https://github.com/nuxeo/nuxeo-elasticsearch/tree/master/scripts
+	   you will find a script to dump Nuxeo documents and import them
+	   into Elasticsearch.
 
 
  
