@@ -104,5 +104,7 @@ To populate it you have 2 options :
 	   you will find a script to dump Nuxeo documents and import them
 	   into Elasticsearch.
 
+## Limitations
 
- 
+See the [nuxeo-elasticsearch addon limitations](https://github.com/nuxeo/nuxeo-elasticsearch/blob/master/README.md).
+
