@@ -127,7 +127,7 @@
      class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
       <property name="maxResults">PAGE_SIZE</property>
       <pattern quoteParameters="false" escapeParameters="true">
-        ecm:fulltext LIKE '?*' AND ecm:mixinType !=
+        dc:title LIKE '?*' AND ecm:mixinType !=
         'HiddenInNavigation' AND ecm:isCheckedInVersion = 0 AND
         ecm:currentLifeCycleState != 'deleted'
       </pattern>
