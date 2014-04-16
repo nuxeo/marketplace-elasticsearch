@@ -9,6 +9,8 @@
     <elasticSearchLocal
       clusterName="${elasticsearch.clusterName}"
       nodeName="${elasticsearch.nodeName}"
+      pathData="${nuxeo.data.dir}/elasticsearch"
+      pathLogs="${nuxeo.log.dir}/elasticsearch"
       httpEnabled="${elasticsearch.httpEnabled}" />
   </extension>
 <#else>

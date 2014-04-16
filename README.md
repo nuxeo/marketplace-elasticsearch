@@ -104,6 +104,34 @@ To populate it you have 2 options :
 	   you will find a script to dump Nuxeo documents and import them
 	   into Elasticsearch.
 
+## Reporting problems
+
+To understand why a document is not present in a search results or not
+indexed. You can activate a debug trace, insert the following lines in
+the `lib/log4j.xml` file:
+
+      <appender name="ELASTIC" class="org.apache.log4j.FileAppender">
+        <errorHandler class="org.apache.log4j.helpers.OnlyOnceErrorHandler" />
+        <param name="File" value="${nuxeo.log.dir}/elastic.log" />
+        <param name="Append" value="false" />
+        <layout class="org.apache.log4j.PatternLayout">
+          <param name="ConversionPattern" value="%d{ISO8601} %-5p [%t][%c] %m%X%n" />
+        </layout>
+      </appender>
+
+      <category name="org.nuxeo.elasticsearch" additivity="false">
+        <priority value="TRACE" />
+        <appender-ref ref="ELASTIC" />
+      </category>
+
+The `elastic.log` will contains all the requests done by Nuxeo to
+Elasticsearch including the `curl` command ready to be copy/paste in a
+term.
+
+If you run in default embedded mode you need to enable the HTTP access
+to perform request, just add `elasticsearch.httpEnabled=true` on your
+`nuxeo.conf`.
+
 ## Limitations
 
 See the [nuxeo-elasticsearch addon limitations](https://github.com/nuxeo/nuxeo-elasticsearch/blob/master/README.md).
