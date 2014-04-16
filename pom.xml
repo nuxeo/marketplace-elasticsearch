@@ -10,10 +10,10 @@
   <artifactId>marketplace-parent</artifactId>
   <packaging>pom</packaging>
   <name>Nuxeo Marketplace package for Nuxeo Elasticsearch</name>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
 
   <properties>
-    <marketplace.elasticsearch.version>1.0.0-SNAPSHOT</marketplace.elasticsearch.version>
+    <marketplace.elasticsearch.version>1.0.1-SNAPSHOT</marketplace.elasticsearch.version>
   </properties>
 
   <modules>
