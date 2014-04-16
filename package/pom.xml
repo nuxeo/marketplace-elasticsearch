@@ -21,12 +21,10 @@
     <dependency>
       <groupId>org.nuxeo.elasticsearch</groupId>
       <artifactId>nuxeo-elasticsearch-core</artifactId>
-      <version>5.9.3</version>
     </dependency>
     <dependency>
       <groupId>org.nuxeo.elasticsearch</groupId>
       <artifactId>nuxeo-elasticsearch-web</artifactId>
-      <version>5.9.3</version>
     </dependency>
   </dependencies>
 
