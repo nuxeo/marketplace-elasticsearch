@@ -3,11 +3,11 @@ marketplace-nuxeo-elasticsearch
 
 ## About
 
-This is project allows to build the marketplace package for
+This project allows to build the marketplace package for
 `nuxeo-elasticsearch` addon.
 
 The goal of this package is to provide an easy way to test
-`elasticsearch` with Nuxeo : elasticsearch.indexNumberOfShards
+`elasticsearch` with Nuxeo: elasticsearch.indexNumberOfShards
  - simple installation
  - default configuration for embedded Elasticsearch
  - default configuration to replace default PageProviders by
@@ -16,14 +16,14 @@ The goal of this package is to provide an easy way to test
 
 ## Building
 
-To build and run the tests, simply start the maven build :
+To build and run the tests, simply start the maven build:
 
     mvn clean install
 
 
 ## Installing
 
-To install the package :
+To install the package:
 
  1. Take a fresh Nuxeo CAP 5.9.3
 
@@ -61,9 +61,7 @@ Look at the
 [`nuxeo.defaults`](https://github.com/nuxeo/marketplace-elasticsearch/blob/master/package/src/main/resources/install/templates/elasticsearch/nuxeo.defaults)
 in the elasticsearch template for more configuration options.
 
-If you want to fine tune the indexing, for instance if you want to
-customize the anlyzer or changing the mapping, you need to add a
-contribution to override the default one.
+
 
 Just create a new config file `myelasticsearch-config.xml` with
 something like this:
@@ -78,7 +76,7 @@ something like this:
     	  <settings />
     	  <mapping />
     	  <fulltext />
-    	</elasticSearchInde>
+    	</elasticSearchIndex>
       </extension>
     </component>
 
@@ -88,18 +86,18 @@ and mapping
 [extension point documentation here](https://github.com/nuxeo/nuxeo-elasticsearch/blob/master/nuxeo-elasticsearch-core/src/main/resources/OSGI-INF/elasticsearch-service.xml).
 
 
-## Upon first startup
+## Upon First Startup
 
 Initially the `elasticsearch` index will be empty.
 
-To populate it you have 2 options :
+To populate it you have 2 options:
 
- - if you have a small repository : 
-     - Go in Admin Center / elasticsearch / config 
-     - use the Reindex button (and wait a few seconds)
+ - if you have a small repository: 
+     1 Go to Admin Center > elasticsearch > config 
+     2 Use the Reindex button (and wait a few seconds)
 
-- if you have a big repository
-     - check
+- if you have a big repository:
+     - Check
 	   https://github.com/nuxeo/nuxeo-elasticsearch/tree/master/scripts
 	   you will find a script to dump Nuxeo documents and import them
 	   into Elasticsearch.
