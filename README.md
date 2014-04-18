@@ -3,20 +3,20 @@ marketplace-nuxeo-elasticsearch
 
 ## About
 
-This project allows to build the marketplace package for
+This project allows to build the Marketplace package for the
 `nuxeo-elasticsearch` addon.
 
 The goal of this package is to provide an easy way to test
-`elasticsearch` with Nuxeo: elasticsearch.indexNumberOfShards
+`Elasticsearch` with Nuxeo: elasticsearch.indexNumberOfShards
  - simple installation
  - default configuration for embedded Elasticsearch
  - default configuration to replace default PageProviders by
-   `elasticsearch` based ones
+   `Elasticsearch` based ones
 
 
 ## Building
 
-To build and run the tests, simply start the maven build:
+To build and run the tests, simply start the Maven build:
 
     mvn clean install
 
@@ -25,27 +25,27 @@ To build and run the tests, simply start the maven build:
 
 To install the package:
 
- 1. Take a fresh Nuxeo CAP 5.9.3
+ 1. Take a fresh Nuxeo CAP 5.9.3.
 
  2. Start the configuration wizard and switch to PostgreSQL (or an
     other external database). For now we don't support the default H2
-    database because of incompatible lucene libs dependencies.
+    database because of incompatible Lucene libs dependencies.
 
- 3. Install the nuxeo-elasticsearch package
-      - from the AdminCenter (Upload + install)
-      - from the command line using `nuxeoctl mp-install package.zip --nodeps`
+ 3. Install the nuxeo-elasticsearch package:
+      - From the AdminCenter (Upload + install)
+      - From the command line using `nuxeoctl mp-install package.zip --nodeps`
 
 ## Configuring
 
-The default configuration uses an embedded elasticsearch instance
-which is running in the same JVM as Nuxeo. By default the
-elasticsearch indexes will be located in
+The default configuration uses an embedded Elasticsearch instance
+which is running in the same JVM as the Nuxeo Platform. By default the
+Elasticsearch indexes will be located in
 `nxsverver/data/elasticsearch`.
 
 This embedded mode is only for testing purpose and should not be used
 in production.
 
-To connect to an existing `elasticsearch 1.1.0` cluster you need to edit the
+To connect to an existing `Elasticsearch 1.1.0` cluster you need to edit the
 `nuxeo.conf` and add the following lines:
 
 
@@ -54,12 +54,12 @@ To connect to an existing `elasticsearch 1.1.0` cluster you need to edit the
 
 
 Where:
-- `addressList` point to one or many elasticsearch nodes.
+- `addressList` points to one or many Elasticsearch nodes.
 - `clusterName` is the cluster name to join.
 
 Look at the
 [`nuxeo.defaults`](https://github.com/nuxeo/marketplace-elasticsearch/blob/master/package/src/main/resources/install/templates/elasticsearch/nuxeo.defaults)
-in the elasticsearch template for more configuration options.
+in the Elasticsearch template for more configuration options.
 
 
 
@@ -90,22 +90,22 @@ and mapping
 
 Initially the `elasticsearch` index will be empty.
 
-To populate it you have 2 options:
+To populate it you have two options:
 
- - if you have a small repository: 
-     1 Go to Admin Center > elasticsearch > config 
-     2 Use the Reindex button (and wait a few seconds)
+ - If you have a small repository: 
+     1 Go to Admin Center > Elasticsearch > Admin 
+     2 Use the ReIndex button (and wait a few seconds)
 
-- if you have a big repository:
+- If you have a big repository:
      - Check
 	   https://github.com/nuxeo/nuxeo-elasticsearch/tree/master/scripts
 	   you will find a script to dump Nuxeo documents and import them
 	   into Elasticsearch.
 
-## Reporting problems
+## Reporting Problems
 
-To understand why a document is not present in a search results or not
-indexed. You can activate a debug trace, insert the following lines in
+To understand why a document is not present in search results or not
+indexed, you can activate a debug trace, insert the following lines in
 the `lib/log4j.xml` file:
 
       <appender name="ELASTIC" class="org.apache.log4j.FileAppender">
@@ -122,12 +122,12 @@ the `lib/log4j.xml` file:
         <appender-ref ref="ELASTIC" />
       </category>
 
-The `elastic.log` will contains all the requests done by Nuxeo to
-Elasticsearch including the `curl` command ready to be copy/paste in a
+The `elastic.log` will contain all the requests done by Nuxeo to
+Elasticsearch including the `curl` command ready to be copied/pasted in a
 term.
 
 If you run in default embedded mode you need to enable the HTTP access
-to perform request, just add `elasticsearch.httpEnabled=true` on your
+to perform request, just add `elasticsearch.httpEnabled=true` in your
 `nuxeo.conf`.
 
 ## Limitations
