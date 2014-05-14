@@ -40,7 +40,7 @@ To install the package:
 The default configuration uses an embedded Elasticsearch instance
 which is running in the same JVM as the Nuxeo Platform. By default the
 Elasticsearch indexes will be located in
-`nxsverver/data/elasticsearch`.
+`nxserver/data/elasticsearch`.
 
 This embedded mode is only for testing purpose and should not be used
 in production.
