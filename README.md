@@ -1,5 +1,5 @@
-marketplace-nuxeo-elasticsearch
-===============================
+Elasticsearch Engine for Nuxeo Platform
+=======================================
 
 ## About
 
