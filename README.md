@@ -25,15 +25,11 @@ To build and run the tests, simply start the Maven build:
 
 To install the package:
 
- 1. Take a fresh Nuxeo CAP 5.9.3.
+ 1. Take a fresh Nuxeo CAP 5.9.4.
 
- 2. Start the configuration wizard and switch to PostgreSQL (or an
-    other external database). For now we don't support the default H2
-    database because of incompatible Lucene libs dependencies.
-
- 3. Install the nuxeo-elasticsearch package:
+ 2. Install the nuxeo-elasticsearch package:
       - From the AdminCenter (Upload + install)
-      - From the command line using `nuxeoctl mp-install package.zip --nodeps`
+      - From the command line using `nuxeoctl mp-install package.zip`
 
 ## Configuring
 
@@ -45,7 +41,7 @@ Elasticsearch indexes will be located in
 This embedded mode is only for testing purpose and should not be used
 in production.
 
-To connect to an existing `Elasticsearch 1.1.0` cluster you need to edit the
+To connect to an existing `Elasticsearch 1.1.2` cluster you need to edit the
 `nuxeo.conf` and add the following lines:
 
 
