@@ -25,7 +25,7 @@ To build and run the tests, simply start the Maven build:
 
 To install the package:
 
- 1. Take a fresh Nuxeo CAP 5.9.4.
+ 1. Take a fresh Nuxeo CAP >= 5.8-HF16
 
  2. Install the nuxeo-elasticsearch package:
       - From the AdminCenter (Upload + install)

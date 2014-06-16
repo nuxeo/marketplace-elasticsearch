@@ -1,5 +1,7 @@
 <install>
   @BUNDLES@
+  <delete file="${env.syslib}/lucene-analyzers-2.3.2.jar"/>
+  <delete file="${env.syslib}/lucene-core-2.3.2.jar"/>
   <update file="${package.root}/install/lib" todir="${env.syslib}" />
   @PROPERTIES@
   @TEMPLATES@
