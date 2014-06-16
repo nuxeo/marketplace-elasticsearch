@@ -30,7 +30,7 @@
 
   <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
     point="elasticSearchIndex">
-    <elasticSearchIndex name="${elasticsearch.indexName}" type="doc" />
+    <elasticSearchIndex name="${elasticsearch.indexName}" type="doc" repository="default" />
   </extension>
 
 </component>
