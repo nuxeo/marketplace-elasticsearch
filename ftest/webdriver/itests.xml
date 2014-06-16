@@ -17,12 +17,12 @@
 
   <!-- Instruction for installing the MP to be tested -->
   <property name="mp.install"
-            value="file:${out.dir}/package-${marketplace.rendering.version}.zip" />
+            value="file:${out.dir}/package-${maven.project.version}.zip" />
   <!-- Override default prepare-environment target to make it download your MP -->
   <target name="prepare-environment"
           depends="_init,prepare-db,prepare-tomcat,prepare-jboss">
     <copy todir="${out.dir}">
-      <artifact:resolveFile key="org.nuxeo.template.rendering:package::zip" />
+      <artifact:resolveFile key="org.nuxeo.elasticsearch:package::zip" />
     </copy>
   </target>
 
