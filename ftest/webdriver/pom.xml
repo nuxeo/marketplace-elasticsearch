@@ -62,7 +62,7 @@
       </plugin>
       <plugin>
         <groupId>org.nuxeo.build</groupId>
-        <artifactId>ant-assembly-maven-plugin</artifactId>
+        <artifactId>nuxeo-distribution-tools</artifactId>
         <configuration>
           <buildFile>${basedir}/itests.xml</buildFile>
         </configuration>
