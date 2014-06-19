@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>package</artifactId>
-  <name>Elasticsearch Integration Marketplace package</name>
+  <name>Nuxeo Elasticsearch Integration Marketplace package</name>
   <packaging>zip</packaging>
 
   <dependencies>
