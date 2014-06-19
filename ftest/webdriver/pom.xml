@@ -9,8 +9,7 @@
   </parent>
 
   <artifactId>webdriver</artifactId>
-  <name>Functional tests of template rendering with WebDriver</name>
-  <description>Functional tests of template rendering with WebDriver</description>
+  <name>Functional tests of Nuxeo Elasticsearch with WebDriver</name>
 
   <dependencies>
     <dependency>
