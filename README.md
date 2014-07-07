@@ -38,7 +38,7 @@ which is running in the same JVM as the Nuxeo Platform. By default the
 Elasticsearch indexes will be located in
 `nxserver/data/elasticsearch`.
 
-This embedded mode is only for testing purpose and should not be used
+This embedded mode *is only for testing purpose* and should not be used
 in production.
 
 To connect to an existing `Elasticsearch 1.1.2` cluster you need to edit the
@@ -51,12 +51,12 @@ To connect to an existing `Elasticsearch 1.1.2` cluster you need to edit the
 
 Where:
 - `addressList` points to one or many Elasticsearch nodes.
-- `clusterName` is the cluster name to join.
+- `clusterName` is the cluster name to join, `elasticsearch` being the
+  default cluster name of a debian package.
 
 Look at the
 [`nuxeo.defaults`](https://github.com/nuxeo/marketplace-elasticsearch/blob/master/package/src/main/resources/install/templates/elasticsearch/nuxeo.defaults)
 in the Elasticsearch template for more configuration options.
-
 
 
 Just create a new config file `myelasticsearch-config.xml` with
@@ -88,15 +88,15 @@ Initially the `elasticsearch` index will be empty.
 
 To populate it you have two options:
 
- - If you have a small repository: 
+ - If you don't have the REST API enable :
      1 Go to Admin Center > Elasticsearch > Admin 
-     2 Use the ReIndex button (and wait a few seconds)
+     2 Use the ReIndex button
+	 This is an asynchron job, you can see in the Admin Center / Monitoring  / Event Bus
+		 when there is no more waiting events the indexing is done.
 
-- If you have a big repository:
-     - Check
+- If you want to first dump the data using the REST API Check:
 	   https://github.com/nuxeo/nuxeo-elasticsearch/tree/master/scripts
-	   you will find a script to dump Nuxeo documents and import them
-	   into Elasticsearch.
+
 
 ## Reporting Problems
 

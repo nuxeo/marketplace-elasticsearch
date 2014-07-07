@@ -18,3 +18,7 @@ elasticsearch.nodeName=nuxeoNode
 
 # Does the local node accept HTTP request on port 9200
 elasticsearch.httpEnabled=false
+
+# Load document model from Elasticsearch result
+# if false load from document from VCS
+elasticsearch.fetchDocFromEs=false
