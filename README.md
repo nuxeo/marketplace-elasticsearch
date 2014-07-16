@@ -69,10 +69,10 @@ something like this:
       <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
         point="elasticSearchIndex">
         <elasticSearchIndex name="nuxeo" type="doc">
-    	  <settings />
-    	  <mapping />
-    	  <fulltext />
-    	</elasticSearchIndex>
+          <settings />
+          <mapping />
+          <fulltext />
+        </elasticSearchIndex>
       </extension>
     </component>
 
@@ -91,11 +91,11 @@ To populate it you have two options:
  - If you don't have the REST API enable :
      1 Go to Admin Center > Elasticsearch > Admin 
      2 Use the ReIndex button
-	 This is an asynchron job, you can see in the Admin Center / Monitoring  / Event Bus
-		 when there is no more waiting events the indexing is done.
+     This is an asynchron job, you can see in the Admin Center / Monitoring  / Event Bus
+         when there is no more waiting events the indexing is done.
 
 - If you want to first dump the data using the REST API Check:
-	   https://github.com/nuxeo/nuxeo-elasticsearch/tree/master/scripts
+       https://github.com/nuxeo/nuxeo-elasticsearch/tree/master/scripts
 
 
 ## Reporting Problems
@@ -124,7 +124,8 @@ term.
 
 If you run in default embedded mode you need to enable the HTTP access
 to perform request, just add `elasticsearch.httpEnabled=true` in your
-`nuxeo.conf`.
+`nuxeo.conf`. Note that this is only for debug purpose you should never
+ever expose publicly the Elasticsearch ports.
 
 ## Limitations
 
