@@ -47,6 +47,7 @@ To connect to an existing `Elasticsearch 1.1.2` cluster you need to edit the
 
     elasticsearch.addressList=localhost:9300,anothernode:9300
     elasticsearch.clusterName=elasticsearch
+    elasticsearch.indexName=nuxeo
 
 
 Where:
