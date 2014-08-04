@@ -25,7 +25,7 @@ To build and run the tests, simply start the Maven build:
 
 To install the package:
 
- 1. Take a fresh Nuxeo CAP 5.9.4.
+ 1. Take a fresh Nuxeo CAP (>= 5.9.4).
 
  2. Install the nuxeo-elasticsearch package:
       - From the AdminCenter (Upload + install)
@@ -89,14 +89,14 @@ Initially the `elasticsearch` index will be empty.
 
 To populate it you have two options:
 
- - If you don't have the REST API enable :
+ - Using the admin center:
      1 Go to Admin Center > Elasticsearch > Admin 
      2 Use the ReIndex button
-     This is an asynchron job, you can see in the Admin Center / Monitoring  / Event Bus
-         when there is no more waiting events the indexing is done.
+     This is an asynchron job, you can see in the Admin Center > Elasticsearch > Info
+         whne the indexing is done.
 
-- If you want to first dump the data using the REST API Check:
-       https://github.com/nuxeo/nuxeo-elasticsearch/tree/master/scripts
+ - Using the REST API you can dump data, then run a bulk import:
+   https://github.com/nuxeo/nuxeo-elasticsearch/tree/master/scripts
 
 
 ## Reporting Problems
