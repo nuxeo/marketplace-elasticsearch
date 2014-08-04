@@ -90,10 +90,12 @@ Initially the `elasticsearch` index will be empty.
 To populate it you have two options:
 
  - Using the admin center:
-     1 Go to Admin Center > Elasticsearch > Admin 
-     2 Use the ReIndex button
-     This is an asynchron job, you can see in the Admin Center > Elasticsearch > Info
-         whne the indexing is done.
+
+     1. Go to Admin Center > Elasticsearch > Admin 
+
+     2. Use the ReIndex button
+        This is an asynchron job, you can see in the Admin Center > Elasticsearch > Info
+        when the indexing is done.
 
  - Using the REST API you can dump data, then run a bulk import:
    https://github.com/nuxeo/nuxeo-elasticsearch/tree/master/scripts
