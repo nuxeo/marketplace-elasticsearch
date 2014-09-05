@@ -10,6 +10,7 @@
 
    <!-- default content views for document content -->
    <contentView name="document_content">
+      <cacheKey>#{currentDocument.repositoryName}#{currentDocument.id}</cacheKey>
 
       <genericPageProvider name="DocumentContent_ES"
         class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
