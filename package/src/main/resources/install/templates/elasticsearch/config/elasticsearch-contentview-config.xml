@@ -4,9 +4,106 @@
   <require>org.nuxeo.ecm.webapp.contentview.contrib</require>
   <require>org.nuxeo.elasticsearch.ElasticSearchComponent</require>
   <require>org.nuxeo.ecm.webapp.pageproviders.contrib</require>
+  <require>org.nuxeo.search.ui.contentviews</require>
 
   <extension target="org.nuxeo.ecm.platform.ui.web.ContentViewService"
     point="contentViews">
+
+    <contentView name="default_search">
+      <title>label.search.default</title>
+      <translateTitle>true</translateTitle>
+      <showTitle>true</showTitle>
+      <emptySentence>label.content.empty.search</emptySentence>
+      <translateEmptySentence>true</translateEmptySentence>
+
+      <genericPageProvider name="default_search_ES"
+        class="org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider">
+        <property name="maxResults">-1</property>
+        <property name="coreSession">#{documentManager}</property>
+        <whereClause docType="DefaultSearch">
+          <fixedPart>
+            ecm:mixinType != 'HiddenInNavigation' AND ecm:isProxy = 0
+            AND ecm:isCheckedInVersion = 0 AND ecm:currentLifeCycleState != 'deleted'
+          </fixedPart>
+          <predicate parameter="ecm:fulltext" operator="FULLTEXT">
+            <field schema="default_search" name="ecm_fulltext" />
+          </predicate>
+          <predicate parameter="dc:creator" operator="IN">
+            <field schema="default_search" name="dc_creator" />
+          </predicate>
+          <predicate parameter="dc:created" operator="BETWEEN">
+            <field schema="default_search" name="dc_created_min" />
+            <field schema="default_search" name="dc_created_max" />
+          </predicate>
+          <predicate parameter="dc:subjects" operator="STARTSWITH">
+            <field schema="default_search" name="dc_subjects" />
+          </predicate>
+          <predicate parameter="dc:coverage" operator="STARTSWITH">
+            <field schema="default_search" name="dc_coverage" />
+          </predicate>
+          <predicate parameter="ecm:path" operator="STARTSWITH">
+            <field schema="default_search" name="ecm_path" />
+          </predicate>
+          <predicate parameter="ecm:tag" operator="IN">
+            <field schema="default_search" name="ecm_tags" />
+          </predicate>
+          <predicate parameter="collectionMember:collectionIds" operator="IN">
+            <field schema="default_search" name="ecm_collections" />
+          </predicate>
+        </whereClause>
+
+        <aggregates>
+          <aggregate id="dc_subjects_agg" type="terms" parameter="dc:subjects">
+            <field schema="default_search" name="dc_subjects_agg" />
+            <properties>
+              <property name="size">10</property>
+            </properties>
+          </aggregate>
+          <aggregate id="dc_coverage_agg" type="terms" parameter="dc:coverage">
+            <field schema="default_search" name="dc_coverage_agg" />
+            <properties>
+              <property name="size">10</property>
+            </properties>
+          </aggregate>
+          <aggregate id="dc_creator_agg" type="terms" parameter="dc:creator">
+            <field schema="default_search" name="dc_creator_agg" />
+            <properties>
+              <property name="size">10</property>
+            </properties>
+          </aggregate>
+        </aggregates>
+
+        <sort column="dc:created" ascending="false" />
+        <pageSize>20</pageSize>
+      </genericPageProvider>
+
+      <searchLayout name="default_search_layout" />
+
+      <showPageSizeSelector>true</showPageSizeSelector>
+      <useGlobalPageSize>false</useGlobalPageSize>
+      <refresh>
+        <event>documentChanged</event>
+        <event>documentChildrenChanged</event>
+      </refresh>
+      <cacheKey>only_one_cache</cacheKey>
+      <cacheSize>1</cacheSize>
+
+      <resultLayouts>
+        <layout name="thumbnail_listing_ajax" title="document_thumbnail_listing"
+          translateTitle="true" iconPath="/icons/document_listing_icon_2_columns_icon.png"
+          showCSVExport="true" showPDFExport="false" showSyndicationLinks="true" />
+        <layout name="search_listing_ajax" title="document_listing"
+          translateTitle="true" iconPath="/icons/document_listing_icon.png"
+          showCSVExport="true" showPDFExport="false" showSyndicationLinks="true" />
+      </resultLayouts>
+
+      <selectionList>CURRENT_SELECTION</selectionList>
+      <actions category="CURRENT_SELECTION_LIST" />
+
+      <flags>
+        <flag>SEARCH</flag>
+      </flags>
+    </contentView>
 
    <!-- default content views for document content -->
    <contentView name="document_content">
@@ -135,6 +232,83 @@
       <!-- sort column="dc:title" ascending="true" / sort by fulltext relevance -->
       <pageSize>10</pageSize>
     </genericPageProvider>
+
+  </extension>
+
+  <extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager"
+    point="widgets">
+
+    <widget name="default_categorization_search" type="container">
+      <handlingLabels>true</handlingLabels>
+      <labels>
+        <label mode="any">label.search.categorizationSearch</label>
+      </labels>
+      <translated>true</translated>
+      <properties widgetMode="any">
+      </properties>
+      <subWidgets>
+        <widget name="dc_subjects" type="selectManyCheckboxDirectoryAggregate">
+          <labels>
+            <label mode="any">label.dublincore.subject</label>
+          </labels>
+          <translated>true</translated>
+          <fields>
+            <field>defaults:dc_subjects_agg</field>
+          </fields>
+          <properties widgetMode="any">
+            <property name="directoryName">l10nsubjects</property>
+            <property name="selectOptions">#{contentView.pageProvider.aggregates['dc_subjects_agg'].buckets}</property>
+            <property name="dbl10n">true</property>
+            <property name="localize">true</property>
+          </properties>
+          <controls mode="any">
+            <control name="supportInsideInputWidgetEffects">true</control>
+          </controls>
+        </widget>
+        <widget name="dc_coverage" type="selectManyCheckboxDirectoryAggregate">
+          <labels>
+            <label mode="any">label.dublincore.coverage</label>
+          </labels>
+          <translated>true</translated>
+          <fields>
+            <field>defaults:dc_coverage_agg</field>
+          </fields>
+          <properties widgetMode="any">
+            <property name="directoryName">l10ncoverage</property>
+            <property name="selectOptions">#{contentView.pageProvider.aggregates['dc_coverage_agg'].buckets}</property>
+            <property name="dbl10n">true</property>
+            <property name="localize">true</property>
+          </properties>
+          <controls mode="any">
+            <control name="supportInsideInputWidgetEffects">true</control>
+          </controls>
+        </widget>
+      </subWidgets>
+    </widget>
+
+    <widget name="default_user_search" type="container">
+      <handlingLabels>true</handlingLabels>
+      <labels>
+        <label mode="any">label.search.userSearch</label>
+      </labels>
+      <translated>true</translated>
+      <subWidgets>
+        <widget name="dc_creator_agg" type="selectManyCheckboxUserAggregate">
+          <labels>
+            <label mode="any">label.dublincore.creator</label>
+          </labels>
+          <fields>
+            <field>defaults:dc_creator_agg</field>
+          </fields>
+          <properties widgetMode="edit">
+            <property name="selectOptions">#{contentView.pageProvider.aggregates['dc_creator_agg'].buckets}</property>
+          </properties>
+          <controls mode="any">
+            <control name="supportInsideInputWidgetEffects">true</control>
+          </controls>
+        </widget>
+      </subWidgets>
+    </widget>
 
   </extension>
 
