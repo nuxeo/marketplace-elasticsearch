@@ -4,7 +4,7 @@
   <require>org.nuxeo.ecm.webapp.contentview.contrib</require>
   <require>org.nuxeo.elasticsearch.ElasticSearchComponent</require>
   <require>org.nuxeo.ecm.webapp.pageproviders.contrib</require>
-  <!--require>org.nuxeo.search.ui.contentviews</require-->
+  <require>org.nuxeo.search.ui.contentviews</require>
 
   <extension target="org.nuxeo.ecm.platform.ui.web.ContentViewService"
     point="contentViews">
