@@ -293,7 +293,7 @@
       </labels>
       <translated>true</translated>
       <subWidgets>
-        <widget name="dc_creator_agg" type="selectManyCheckboxUserAggregate">
+        <widget name="dc_creator_agg" type="selectManyListboxUserAggregate">
           <labels>
             <label mode="any">label.dublincore.creator</label>
           </labels>
