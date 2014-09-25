@@ -3,7 +3,6 @@
 
   <require>org.nuxeo.ecm.webapp.contentview.contrib</require>
   <require>org.nuxeo.elasticsearch.ElasticSearchComponent</require>
-  <require>org.nuxeo.ecm.webapp.contentview.search.contrib</require>
   <!-- require>org.nuxeo.ecm.platform.suggestbox.core.pageproviders</require -->
 
   <extension target="org.nuxeo.ecm.platform.ui.web.ContentViewService"

@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <component name="org.nuxeo.elasticsearch.contentviews.override">
 
-  <require>org.nuxeo.ecm.webapp.contentview.contrib</require>
   <require>org.nuxeo.elasticsearch.ElasticSearchComponent</require>
   <require>org.nuxeo.ecm.webapp.pageproviders.contrib</require>
   <require>org.nuxeo.search.ui.contentviews</require>
