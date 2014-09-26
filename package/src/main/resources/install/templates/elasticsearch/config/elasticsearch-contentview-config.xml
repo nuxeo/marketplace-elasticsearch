@@ -85,6 +85,7 @@
             <properties>
               <property name="interval">year</property>
               <property name="format">yyyy</property>
+              <property name="order">key desc</property>
             </properties>
           </aggregate>
           <aggregate id="dc_modified_agg" type="date_range" parameter="dc:modified">
