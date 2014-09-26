@@ -70,6 +70,36 @@
               <property name="size">10</property>
             </properties>
           </aggregate>
+          <aggregate id="common_size_agg" type="range" parameter="common:size">
+            <field schema="default_search" name="common_size_agg" />
+            <ranges>
+              <range key="tiny" to="102400"/>
+              <range key="small" from="102401" to="1048576"/>
+              <range key="medium" from="1048577" to="10485760"/>
+              <range key="big" from="10485761" to="104857600" />
+              <range key="huge" from="104857601" />
+            </ranges>
+          </aggregate>
+          <aggregate id="dc_created_agg" type="date_histogram" parameter="dc:created">
+            <field schema="default_search" name="dc_created_agg" />
+            <properties>
+              <property name="interval">year</property>
+              <property name="format">yyyy</property>
+            </properties>
+          </aggregate>
+          <aggregate id="dc_modified_agg" type="date_range" parameter="dc:modified">
+            <field schema="default_search" name="dc_modified_agg" />
+            <properties>
+              <property name="format">"dd-MM-yyyy"</property>
+            </properties>
+            <dateRanges>
+              <dateRange key="last24h" fromDate="now-24H" toDate="now"/>
+              <dateRange key="lastWeek" fromDate="now-7d" toDate="now-24H"/>
+              <dateRange key="lastMonth" fromDate="now-1M" toDate="now-7d"/>
+              <dateRange key="lastYear" fromDate="now-1y" toDate="now-1M"/>
+              <dateRange key="priorToLastYear" toDate="now-1y"/>
+            </dateRanges>
+          </aggregate>
         </aggregates>
 
         <sort column="dc:created" ascending="false" />
@@ -246,7 +276,7 @@
       <properties widgetMode="any">
       </properties>
       <subWidgets>
-        <widget name="dc_subjects" type="selectManyCheckboxDirectoryAggregate">
+        <widget name="dc_subjects_agg" type="selectManyCheckboxDirectoryAggregate">
           <labels>
             <label mode="any">label.dublincore.subject</label>
           </labels>
@@ -264,7 +294,7 @@
             <control name="supportInsideInputWidgetEffects">true</control>
           </controls>
         </widget>
-        <widget name="dc_coverage" type="selectManyCheckboxDirectoryAggregate">
+        <widget name="dc_coverage_agg" type="selectManyCheckboxDirectoryAggregate">
           <labels>
             <label mode="any">label.dublincore.coverage</label>
           </labels>
@@ -278,6 +308,80 @@
             <property name="dbl10n">true</property>
             <property name="localize">true</property>
           </properties>
+          <controls mode="any">
+            <control name="supportInsideInputWidgetEffects">true</control>
+          </controls>
+        </widget>
+        <widget name="common_size_agg" type="selectManyCheckboxRangeAggregate">
+          <labels>
+            <label mode="any">label.common.size</label>
+          </labels>
+          <translated>true</translated>
+          <fields>
+            <field>defaults:common_size_agg</field>
+          </fields>
+          <properties widgetMode="any">
+            <property name="selectOptions">#{contentView.pageProvider.aggregates['common_size_agg'].buckets}</property>
+          </properties>
+          <!-- selectOptions>
+            <option itemLabel="#{messages['label.aggregate.size.small']}" itemValue="small"  />
+            <option itemLabel="#{messages['label.aggregate.size.medium']}" itemValue="medium" />
+            <option itemLabel="#{messages['label.aggregate.size.big']}" itemValue="big" />
+          </selectOptions-->
+          <controls mode="any">
+            <control name="supportInsideInputWidgetEffects">true</control>
+          </controls>
+        </widget>
+      </subWidgets>
+    </widget>
+
+    <widget name="default_date_search" type="container">
+      <handlingLabels>true</handlingLabels>
+      <labels>
+        <label mode="any">label.search.dateSearch</label>
+      </labels>
+      <translated>true</translated>
+      <subWidgets>
+        <widget name="dc_created_agg" type="selectManyCheckboxDateHistogramAggregate">
+          <labels>
+            <label mode="any">label.aggregate.created.in</label>
+          </labels>
+          <translated>true</translated>
+          <fields>
+            <field>defaults:dc_created_agg</field>
+          </fields>
+          <properties widgetMode="any">
+            <property name="selectOptions">#{contentView.pageProvider.aggregates['dc_created_agg'].buckets}</property>
+          </properties>
+          <!-- selectOptions>
+            <option itemLabel="#{messages['label.aggregate.size.tiny']}" itemValue="tiny"  />
+            <option itemLabel="#{messages['label.aggregate.size.small']}" itemValue="small"  />
+            <option itemLabel="#{messages['label.aggregate.size.medium']}" itemValue="medium" />
+            <option itemLabel="#{messages['label.aggregate.size.big']}" itemValue="big" />
+            <option itemLabel="#{messages['label.aggregate.size.huge']}" itemValue="huge" />
+          </selectOptions-->
+          <controls mode="any">
+            <control name="supportInsideInputWidgetEffects">true</control>
+          </controls>
+        </widget>
+        <widget name="dc_modified_agg" type="selectManyCheckboxDateRangeAggregate">
+          <labels>
+            <label mode="any">label.aggregate.modified</label>
+          </labels>
+          <translated>true</translated>
+          <fields>
+            <field>defaults:dc_modified_agg</field>
+          </fields>
+          <properties widgetMode="any">
+            <property name="selectOptions">#{contentView.pageProvider.aggregates['dc_modified_agg'].buckets}</property>
+          </properties>
+          <!-- selectOptions>
+            <option itemLabel="#{messages['label.aggregate.modified.last24H']}" itemValue="last24H"  />
+            <option itemLabel="#{messages['label.aggregate.modified.lastWeek']}" itemValue="lastWeek"  />
+            <option itemLabel="#{messages['label.aggregate.modified.lastMonth']}" itemValue="lastMonth" />
+            <option itemLabel="#{messages['label.aggregate.modified.lastYear']}" itemValue="lastYear" />
+            <option itemLabel="#{messages['label.aggregate.modified.priorToLastYear']}" itemValue="priorToLastYear" />
+          </selectOptions-->
           <controls mode="any">
             <control name="supportInsideInputWidgetEffects">true</control>
           </controls>
