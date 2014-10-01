@@ -52,6 +52,12 @@
         </whereClause>
 
         <aggregates>
+          <aggregate id="dc_nature_agg" type="terms" parameter="dc:nature">
+            <field schema="default_search" name="dc_nature_agg" />
+            <properties>
+              <property name="size">10</property>
+            </properties>
+          </aggregate>
           <aggregate id="dc_subjects_agg" type="terms" parameter="dc:subjects">
             <field schema="default_search" name="dc_subjects_agg" />
             <properties>
