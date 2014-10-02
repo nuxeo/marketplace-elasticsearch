@@ -20,6 +20,9 @@ To build and run the tests, simply start the Maven build:
 
     mvn clean install
 
+To run functional tests:
+
+    mvn clean install -Pftest
 
 ## Installing
 
