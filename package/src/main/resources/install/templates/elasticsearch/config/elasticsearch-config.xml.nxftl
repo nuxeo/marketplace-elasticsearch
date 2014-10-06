@@ -184,6 +184,9 @@
             }
          }
       },
+      "ecm:pos": {
+         "type": "integer"
+      },
       "dc:created": {
          "format": "dateOptionalTime",
         "type": "date"
