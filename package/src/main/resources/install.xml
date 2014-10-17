@@ -1,6 +1,0 @@
-<install>
-  @BUNDLES@
-  <update file="${package.root}/install/lib" todir="${env.syslib}" />
-  @PROPERTIES@
-  @TEMPLATES@
-</install>

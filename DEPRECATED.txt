@@ -1,0 +1,5 @@
+The marketplace package is deprecated, elasticsearch is now part of 5.9.6/6.0 Nuxeo CAP
+To override the same page providers you can simply add the following line in your nuxeo.conf:
+
+elasticsearch.override.pageproviders=default_search,document_content,section_content,document_content,tree_children,default_document_suggestion,simple_search,advanced_search,nxql_search,DEFAULT_DOCUMENT_SUGGESTION
+
