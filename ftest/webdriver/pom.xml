@@ -4,7 +4,7 @@
     <groupId>org.nuxeo.elasticsearch</groupId>
     <artifactId>marketplace-parent</artifactId>
     <relativePath>../../pom.xml</relativePath>
-    <version>1.2.10-SNAPSHOT</version>
+    <version>1.2.10</version>
   </parent>
 
   <artifactId>webdriver</artifactId>
