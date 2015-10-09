@@ -128,5 +128,5 @@ to perform request, just add `elasticsearch.httpEnabled=true` in your
 
 ## Limitations
 
-See the [nuxeo-elasticsearch addon limitations](https://github.com/nuxeo/nuxeo-elasticsearch/blob/master/README.md).
+See the [nuxeo-elasticsearch addon limitations](https://github.com/nuxeo-archives/nuxeo-features/tree/5.8/nuxeo-elasticsearch).
 
